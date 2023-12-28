@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="107f739d75fe4cc7945d73f4c3fa11e3" Name="Diagram1">
+        <EntityTypeShape EntityType="IoT_system_DMModel.DataStore" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DMModel.Date" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DMModel.DeviceLocation" Width="1.5" PointX="6.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DMModel.Scenario" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="IoT_system_DMModel.FK_DataStore_Date" ManuallyRouted="false" />
+        <AssociationConnector Association="IoT_system_DMModel.FK_DataStore_DeviceLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="IoT_system_DMModel.FK_DataStore_Scenario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

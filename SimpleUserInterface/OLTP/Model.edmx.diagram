@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ac81bcea09244d37a0e28336569b6551" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="IoT_system_DBModel.DataName" Width="1.5" PointX="8.375" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DBModel.Device" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DBModel.Location" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DBModel.Scenario" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IoT_system_DBModel.Type" Width="1.5" PointX="8.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="IoT_system_DBModel.FK_Device_DataName" ManuallyRouted="false" />
+        <AssociationConnector Association="IoT_system_DBModel.FK_Device_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="IoT_system_DBModel.FK_Device_Scenario" ManuallyRouted="false" />
+        <AssociationConnector Association="IoT_system_DBModel.FK_Device_Type" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

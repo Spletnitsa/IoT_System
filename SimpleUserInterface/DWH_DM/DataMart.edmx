@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище IoT_system_DMModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DataStore">
+          <Key>
+            <PropertyRef Name="ID_data" />
+          </Key>
+          <Property Name="ID_data" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Scenario_key" Type="int" Nullable="false" />
+          <Property Name="Location_key" Type="int" Nullable="false" />
+          <Property Name="Date_key" Type="int" Nullable="false" />
+          <Property Name="Device_name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data_name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="ID_date" />
+          </Key>
+          <Property Name="ID_date" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_time" Type="datetime" Nullable="false" />
+          <Property Name="Hour" Type="int" Nullable="false" />
+          <Property Name="Day" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeviceLocation">
+          <Key>
+            <PropertyRef Name="ID_device_location" />
+          </Key>
+          <Property Name="ID_device_location" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="HouseNumber" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scenario">
+          <Key>
+            <PropertyRef Name="ID_scenario" />
+          </Key>
+          <Property Name="ID_scenario" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Upload_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DataStore_Date">
+          <End Role="Date" Type="Self.Date" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="ID_date" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Date_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataStore_DeviceLocation">
+          <End Role="DeviceLocation" Type="Self.DeviceLocation" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceLocation">
+              <PropertyRef Name="ID_device_location" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Location_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataStore_Scenario">
+          <End Role="Scenario" Type="Self.Scenario" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario">
+              <PropertyRef Name="ID_scenario" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Scenario_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище IoT_system_DMModelContainer">
+          <EntitySet Name="DataStore" EntityType="Self.DataStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Date" EntityType="Self.Date" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceLocation" EntityType="Self.DeviceLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scenario" EntityType="Self.Scenario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DataStore_Date" Association="Self.FK_DataStore_Date">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataStore_DeviceLocation" Association="Self.FK_DataStore_DeviceLocation">
+            <End Role="DeviceLocation" EntitySet="DeviceLocation" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataStore_Scenario" Association="Self.FK_DataStore_Scenario">
+            <End Role="Scenario" EntitySet="Scenario" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IoT_system_DMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DataStore">
+          <Key>
+            <PropertyRef Name="ID_data" />
+          </Key>
+          <Property Name="ID_data" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Scenario_key" Type="Int32" Nullable="false" />
+          <Property Name="Location_key" Type="Int32" Nullable="false" />
+          <Property Name="Date_key" Type="Int32" Nullable="false" />
+          <Property Name="Device_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Data_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Date" Relationship="Self.FK_DataStore_Date" FromRole="DataStore" ToRole="Date" />
+          <NavigationProperty Name="DeviceLocation" Relationship="Self.FK_DataStore_DeviceLocation" FromRole="DataStore" ToRole="DeviceLocation" />
+          <NavigationProperty Name="Scenario" Relationship="Self.FK_DataStore_Scenario" FromRole="DataStore" ToRole="Scenario" />
+        </EntityType>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="ID_date" />
+          </Key>
+          <Property Name="ID_date" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Hour" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DataStore" Relationship="Self.FK_DataStore_Date" FromRole="Date" ToRole="DataStore" />
+        </EntityType>
+        <EntityType Name="DeviceLocation">
+          <Key>
+            <PropertyRef Name="ID_device_location" />
+          </Key>
+          <Property Name="ID_device_location" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="HouseNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DataStore" Relationship="Self.FK_DataStore_DeviceLocation" FromRole="DeviceLocation" ToRole="DataStore" />
+        </EntityType>
+        <EntityType Name="Scenario">
+          <Key>
+            <PropertyRef Name="ID_scenario" />
+          </Key>
+          <Property Name="ID_scenario" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Upload_status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DataStore" Relationship="Self.FK_DataStore_Scenario" FromRole="Scenario" ToRole="DataStore" />
+        </EntityType>
+        <Association Name="FK_DataStore_Date">
+          <End Role="Date" Type="Self.Date" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Date">
+              <PropertyRef Name="ID_date" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Date_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataStore_DeviceLocation">
+          <End Role="DeviceLocation" Type="Self.DeviceLocation" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceLocation">
+              <PropertyRef Name="ID_device_location" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Location_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataStore_Scenario">
+          <End Role="Scenario" Type="Self.Scenario" Multiplicity="1" />
+          <End Role="DataStore" Type="Self.DataStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scenario">
+              <PropertyRef Name="ID_scenario" />
+            </Principal>
+            <Dependent Role="DataStore">
+              <PropertyRef Name="Scenario_key" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IoT_system_DataMartEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DataStore" EntityType="Self.DataStore" />
+          <EntitySet Name="Date" EntityType="Self.Date" />
+          <EntitySet Name="DeviceLocation" EntityType="Self.DeviceLocation" />
+          <EntitySet Name="Scenario" EntityType="Self.Scenario" />
+          <AssociationSet Name="FK_DataStore_Date" Association="Self.FK_DataStore_Date">
+            <End Role="Date" EntitySet="Date" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataStore_DeviceLocation" Association="Self.FK_DataStore_DeviceLocation">
+            <End Role="DeviceLocation" EntitySet="DeviceLocation" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataStore_Scenario" Association="Self.FK_DataStore_Scenario">
+            <End Role="Scenario" EntitySet="Scenario" />
+            <End Role="DataStore" EntitySet="DataStore" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище IoT_system_DMModelContainer" CdmEntityContainer="IoT_system_DataMartEntities">
+          <EntitySetMapping Name="DataStore">
+            <EntityTypeMapping TypeName="IoT_system_DMModel.DataStore">
+              <MappingFragment StoreEntitySet="DataStore">
+                <ScalarProperty Name="ID_data" ColumnName="ID_data" />
+                <ScalarProperty Name="Scenario_key" ColumnName="Scenario_key" />
+                <ScalarProperty Name="Location_key" ColumnName="Location_key" />
+                <ScalarProperty Name="Date_key" ColumnName="Date_key" />
+                <ScalarProperty Name="Device_name" ColumnName="Device_name" />
+                <ScalarProperty Name="Data_name" ColumnName="Data_name" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Date">
+            <EntityTypeMapping TypeName="IoT_system_DMModel.Date">
+              <MappingFragment StoreEntitySet="Date">
+                <ScalarProperty Name="ID_date" ColumnName="ID_date" />
+                <ScalarProperty Name="Date_time" ColumnName="Date_time" />
+                <ScalarProperty Name="Hour" ColumnName="Hour" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceLocation">
+            <EntityTypeMapping TypeName="IoT_system_DMModel.DeviceLocation">
+              <MappingFragment StoreEntitySet="DeviceLocation">
+                <ScalarProperty Name="ID_device_location" ColumnName="ID_device_location" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scenario">
+            <EntityTypeMapping TypeName="IoT_system_DMModel.Scenario">
+              <MappingFragment StoreEntitySet="Scenario">
+                <ScalarProperty Name="ID_scenario" ColumnName="ID_scenario" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Upload_status" ColumnName="Upload_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
